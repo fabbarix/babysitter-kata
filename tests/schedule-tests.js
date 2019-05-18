@@ -26,7 +26,7 @@ describe('FamilyPaymentSchedule', function() {
          * Extra family - edge case test
          */
         let familyD = new FamilyPaymentSchedule('Family D', 20);
-        familyC.addRate('01:00AM', 25);
+        familyD.addRate('01:00AM', 25);
 
         /**
          * Test the specs
@@ -49,11 +49,14 @@ describe('FamilyPaymentSchedule', function() {
         it('Should return a rate of $16 for Family B at 03AM', function() {
             expect(familyB.rateFor(3)).to.equal(16);
         });
-        it('Should return a rate of $21 for Family C at 9PM', function() {
-            expect(familyC.rateFor(21)).to.equal(21);
+        it('Should return a rate of $21 for Family C at 8PM', function() {
+            expect(familyC.rateFor(20)).to.equal(21);
         });
-        it('Should return a rate of $15 for Family C at 11PM', function() {
-            expect(familyC.rateFor(23)).to.equal(15);
+        it('Should return a rate of $15 for Family C at 9PM', function() {
+            expect(familyC.rateFor(21)).to.equal(15);
+        });
+        it('Should return a rate of $15 for Family C at 2AM', function() {
+            expect(familyC.rateFor(2)).to.equal(15);
         });
         it('Should return a rate of $20 for Family D at 12AM', function() {
             expect(familyD.rateFor(0)).to.equal(20);
