@@ -5,10 +5,12 @@ import { TimeValidationError } from './errors/time-validation-error';
  */
 export class TimeValidation {
 
+    
     /**
      * Creates an instance of the time validation class
      * initialized to verify times between `startTime` and
-     * `endTime` as valid working hours.
+     * `endTime` as valid working hours. The expected format
+     * of these times is `HH:MM<AM|PM>`.
      * 
      * @constructor
      * @param {String} startTime 

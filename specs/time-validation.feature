@@ -2,6 +2,7 @@ Feature: Time validation
   In order to prevent the babysitter from entering
   invalid working hours these need to be validated.
 
+# Happy path
   Scenario: Regular hours
     Given a starting time of <start>
     And an end time of <end>
@@ -13,6 +14,20 @@ Feature: Time validation
       | 5:30PM    | 3:00AM  |
       | 8:45PM    | 11:00PM |
 
+# Bad formatting
+  Scenario: Badly formatted hours
+    Given a wrongly formatted start time of <start>
+    And a correctly formatted end time of <end>
+    When I run the validation
+    Then I expect the hours to be rejected with <message>
+
+      | start      | end      | message |
+      | 27:00PM    | 6:00PM   | The start time 27:00PM is not in the correct format  |
+      | ag:103PM   | 6:00PM   | The start time ag:103PM is not in the correct format |
+      | :00AM      | 6:00PM   | The start time :00AM is not in the correct format    |
+      | 12:00      | 6:00PM   | The start time 12:00 is not in the correct format    |
+
+# Time validation errors
   Scenario: Wrong order start and end times
     Given a starting time of <start>
     And an end time of <end>
@@ -24,6 +39,7 @@ Feature: Time validation
       | 11:00PM   | 3:00PM  | The start time 11:00PM is later than the end time 3:00AM |
       | 4:00AM    | 11:00PM | The start time 4:00AM is later than the end time 11:00PM |
 
+# Working hours errors
   Scenario: Times submitted outside the allowed range
     Given a starting time of <start>
     And an end time of <end>
