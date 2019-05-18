@@ -5,6 +5,7 @@
   "description": "The Kata exercise",
   "main": "src/index.js",
   "scripts": {
+    "start": "node -r esm src/index.js",
     "test": "node -r esm node_modules/.bin/cucumber-js -f node_modules/cucumber-pretty ./specs -r ./steps",
     "dev:test": "mocha -r esm tests"
   },
@@ -18,6 +19,7 @@
     "mocha": "^6.1.4"
   },
   "dependencies": {
-    "esm": "^3.2.25"
+    "esm": "^3.2.25",
+    "inquirer": "^6.3.1"
   }
 }
