@@ -146,12 +146,12 @@ describe('Time', function() {
         it('Should validate that 08:00AM comes after a 06:00AM start time', function() {
             let timeBefore = new Time('08:00AM');
             let timeAfter = new Time('06:00AM');
-            expect(timeBefore.isBeforeEnd(timeAfter)).to.equal(true);
+            expect(timeBefore.isAfterStart(timeAfter)).to.equal(true);
         });
         it('Should validate that 03:00AM comes after a 11:00PM start time', function() {
             let timeBefore = new Time('03:00AM');
             let timeAfter = new Time('11:00PM');
-            expect(timeBefore.isBeforeEnd(timeAfter)).to.equal(true);
+            expect(timeBefore.isAfterStart(timeAfter)).to.equal(true);
         });
     });
 });

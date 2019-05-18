@@ -5,6 +5,10 @@ import { TimeFormatError } from './errors/time-format-error';
  */
 export class Time {
     
+    get strTime() {
+        return `${`0${this.hours}`.slice(-2)}:${`0${this.minutes}`.slice(-2)}${this.meridian}`;
+    }
+
     /**
      * @constructor
      * @param {String} strTime Optional. Time representation as string. Expected format: `HH:MM(AM|PM)`
@@ -26,11 +30,87 @@ export class Time {
     }
 
     /**
+     * Compare our instance of {@link Time} to `endTime` to see we are before
+     * the other time, assuming the other time is a `check-out` time for the
+     * babysitter.
      * 
-     * @param {Time} otherTime The time to compare against to see if we are before or after.
+     * @param {Time} endTime The shift end time to compare against.
+     * @returns {Boolean} `true` if we are before the provided shift `endTime`.
      */
-    isBefore(otherTime) {
+    isBeforeEnd(endTime) {
+        /**
+         * A bit of logic here: this is made to compare times across a 24 hours period,
+         * assumtion is that a babysitter will not work more than 24 hours in a row.
+         * 
+         * If we are an `AM` time we are before the end time if that time is a `PM`
+         * time value or if we are `<` the other `AM` time.
+         *  IE: 
+         *     - `10:00AM` is always before an end time of `12:00PM-11:59PM`
+         *     - `10:00AM` is always after an end time of `12:00AM-09:59AM`
+         *     - `10:00AM` is always before an end time of `10:01AM-11:59AM`
+         * 
+         * If we are a `PM` time we are before the end time if that time is a `AM`
+         * time value or if we are `<` the other `PM` time.
+         *  IE: 
+         *     - `10:00PM` is always before an end time of `12:00AM-11:59AM`
+         *     - `10:00PM` is always after an end time of `12:00PM-09:59PM`
+         *     - `10:00PM` is always before an end time of `10:01PM-11:59PM`
+         */
+        if (this.isAM() && endTime.isAM() || this.isPM() && endTime.isPM() ) {
+            return this._numValue() < endTime._numValue();
+        }
+        if (this.isAM() && endTime.isPM()) {
+            return false;
+        }
         return true;
+    }
+
+    /**
+     * Compare our instance of {@link Time} to `startTime` to see we are after
+     * the other time, assuming the other time is a `check-in` time for the
+     * babysitter.
+     * 
+     * @param {Time} startTime The shift start time to compare against.
+     * @returns {Boolean} `true` if we are after the provided shift `startTime`.
+     */
+    isAfterStart(startTime) {
+        /**
+         * Same assumptions, but the reverse of the logic applied above is applied in this case.
+         */
+        if (this.isAM() && startTime.isAM() || this.isPM() && startTime.isPM() ) {
+            return this._numValue() > startTime._numValue();
+        }
+        if (this.isAM() && startTime.isPM()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns a numeric value for this instance of {@link Time}.
+     * 
+     * @returns {number} A numeric value for this {@link Time} instance.
+     */
+    _numValue() {
+        return parseInt(`${this.hours}${this.minutes}`);
+    }
+
+    /**
+     * Returns true is this instance of {@link Time} is PM.
+     * 
+     * @returns {boolean} True is this instance of {@link Time} is PM.
+     */
+    isPM() {
+        return this.meridian == 'PM';
+    }
+
+    /**
+     * Returns true is this instance of {@link Time} is AM.
+     * 
+     * @returns {boolean} True is this instance of {@link Time} is AM.
+     */
+    isAM() {
+        return !this.isPM();
     }
 
     /**
