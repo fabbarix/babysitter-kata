@@ -1,0 +1,14 @@
+{
+  "name": "kata",
+  "version": "1.0.0",
+  "description": "The Kata exercise",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "cucumber-js ./specs -r ./steps"
+  },
+  "author": "Fabio 'MrWHO' Torchetti <fabbari@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "cucumber": "^5.1.0"
+  }
+}
