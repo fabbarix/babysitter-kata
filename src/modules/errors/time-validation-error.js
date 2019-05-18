@@ -3,6 +3,9 @@
  */
 export class TimeValidationError extends Error {
     
+    startTime;
+    endTime;
+
     /**
      * Creates and instance of `TimeValidationError` that will
      * be populated with the time range properties.
