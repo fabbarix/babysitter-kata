@@ -1,3 +1,5 @@
+import { Time } from "./time";
+
 /**
  * This class handles the payment schedule for a
  * family.
@@ -24,7 +26,11 @@ export class FamilyPaymentSchedule {
      * @throws {@link TimeFormatException} in case the provided format is invalid.
      */
     addRate(startingHour, rate) {
-
+        let startTime = new Time(startingHour).euroHours;
+        if (startTime<12) {
+            startTime +=24;
+        }
+        this._extraRates.push({startTime, rate});
     }
 
     /**
@@ -34,6 +40,18 @@ export class FamilyPaymentSchedule {
      * @param {number} hour Hour expressed in euro format (24Hrs).
      */
     rateFor(hour) {
-        return 0;
+        /* Early morning is really the next day */
+        if (hour<12) {
+            hour+=24;
+        }
+        let rate = this._defaultRate;
+        if (this._extraRates.length > 0) {
+            let nextRate = this._extraRates
+                .reduce((prev, rate) => {
+                    return hour>=rate.startTime ? rate : prev;
+                } ,{startTime: 0, rate: this._defaultRate});
+            rate = nextRate.rate;
+        }
+        return rate;
     }
 }
