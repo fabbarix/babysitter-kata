@@ -18,11 +18,7 @@ class ScheduleWorld {
   }
 
   calculatePayment(strStart, strEnd) {
-    let startTime = new Time(strStart);
-    let endTime = new Time(strEnd);
-    this._payment = startTime
-        .hoursTo(endTime)
-        .reduce((total, hour) => this.family.rateFor(hour) + total, 0);
+    this._payment = this.family.calculatePayment(strStart, strEnd);
   }
 
   get payment() { return this._payment; }
