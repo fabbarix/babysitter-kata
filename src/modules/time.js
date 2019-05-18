@@ -14,7 +14,7 @@ export class Time {
     }
 
     get euroHours() {
-        let euro = this.isAM() ? this.hours : this.hours + 12;
+        return (this.isAM() && this.hours !== 12) || (this.isPM() && this.hours === 12) ? this.hours : this.hours + 12;
     }
 
     /**
@@ -39,13 +39,31 @@ export class Time {
 
     /**
      * Returns an array of hours from this instance of {@link Time} to
-     * the `endTime` passed as a parameter.
+     * the `endTime` passed as a parameter. Assumes `endTime` is after
+     * us in the timeline.
      * 
      * @param {Time} endTime The time to count the hours to.
      * @returns {Arryay[int]} The hours between this instance and `endTime`
      */
     hoursTo(endTime) {
-        return [];
+        let hours = [];
+        
+        let startHour = this.euroHours === 24 ? 0 : this.euroHours;
+        
+        /** That's why we user 24hrs. The `+1` is to make sure that
+         *  shifts starting and ending at the same hour will bill for
+         *  at least one hour.
+         */
+        let numHours = this.euroHours <= endTime.euroHours ? 
+            endTime.euroHours - this.euroHours + 1:
+            endTime.euroHours + 24 - this.euroHours + 1;
+
+        while (numHours) {
+            hours.push(startHour);
+            startHour = startHour == 23 ? 0 : startHour + 1;
+            numHours--;
+        }
+        return hours;
     }
 
     /**
