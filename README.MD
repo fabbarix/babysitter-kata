@@ -1,4 +1,4 @@
-# Accenture Kata
+# Accenture BabySitter Kata
 
 This is my sumbission for the Kata.
 
