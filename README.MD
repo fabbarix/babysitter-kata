@@ -6,8 +6,8 @@ This is my sumbission for the Kata.
 
 This code has the following requirements:
 
-  - nodejs installed, at least version 8.10.0
-  - npm installed, at least version 3.5.2
+  - nodejs installed, at least version 12.2.0
+  - npm installed, at least version 6.9.0
 
 The remaining requirements will be installed in the next section.
 
