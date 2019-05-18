@@ -9,6 +9,10 @@ export class Time {
         return `${`0${this.hours}`.slice(-2)}:${`0${this.minutes}`.slice(-2)}${this.meridian}`;
     }
 
+    get numValue() {
+        return parseInt(`${`0${this.hours}`.slice(-2)}${`0${this.minutes}`.slice(-2)}`);
+    }
+
     /**
      * @constructor
      * @param {String} strTime Optional. Time representation as string. Expected format: `HH:MM(AM|PM)`
@@ -57,7 +61,7 @@ export class Time {
          *     - `10:00PM` is always before an end time of `10:01PM-11:59PM`
          */
         if (this.isAM() && endTime.isAM() || this.isPM() && endTime.isPM() ) {
-            return this._numValue() < endTime._numValue();
+            return this.numValue < endTime.numValue;
         }
         if (this.isAM() && endTime.isPM()) {
             return false;
@@ -78,21 +82,12 @@ export class Time {
          * Same assumptions, but the reverse of the logic applied above is applied in this case.
          */
         if (this.isAM() && startTime.isAM() || this.isPM() && startTime.isPM() ) {
-            return this._numValue() > startTime._numValue();
+            return this.numValue > startTime.numValue;
         }
         if (this.isAM() && startTime.isPM()) {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Returns a numeric value for this instance of {@link Time}.
-     * 
-     * @returns {number} A numeric value for this {@link Time} instance.
-     */
-    _numValue() {
-        return parseInt(`${this.hours}${this.minutes}`);
     }
 
     /**
