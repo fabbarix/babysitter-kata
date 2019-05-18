@@ -106,5 +106,20 @@ describe('Time', function() {
             let timeAfter = new Time('04:00AM');
             expect(timeBefore.isBefore(timeAfter)).to.equal(true);
         });
+        it('Should validate that 05:00PM comes after 03:00PM', function() {
+            let timeBefore = new Time('05:00PM');
+            let timeAfter = new Time('03:00PM');
+            expect(timeBefore.isBefore(timeAfter)).to.equal(false);
+        });
+        it('Should validate that 08:00AM comes after 06:00AM', function() {
+            let timeBefore = new Time('08:00AM');
+            let timeAfter = new Time('06:00AM');
+            expect(timeBefore.isBefore(timeAfter)).to.equal(false);
+        });
+        it('Should validate that 03:00AM comes after 11:00PM', function() {
+            let timeBefore = new Time('03:00AM');
+            let timeAfter = new Time('11:00PM');
+            expect(timeBefore.isBefore(timeAfter)).to.equal(false);
+        });
     });
 });

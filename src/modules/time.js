@@ -26,6 +26,14 @@ export class Time {
     }
 
     /**
+     * 
+     * @param {Time} otherTime The time to compare against to see if we are before or after.
+     */
+    isBefore(otherTime) {
+        return true;
+    }
+
+    /**
      * Parses `strTime` to initialize the {@link Time} instance. The
      * expected format is `HH:MM(AM|PM)`
      * 
