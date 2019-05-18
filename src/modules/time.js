@@ -1,4 +1,4 @@
-import TimeFormatError from './errors/time-format-error';
+import { TimeFormatError } from './errors/time-format-error';
 /**
  * This class contains the logic for the representation
  * of time.
@@ -7,10 +7,21 @@ export class Time {
     
     /**
      * @constructor
-     * @param {String} strTime Time representation as string. Expected format: `HH:MM(AM|PM)`
+     * @param {String} strTime Optional. Time representation as string. Expected format: `HH:MM(AM|PM)`
      * @throws {@link TimeFormatError} in case the string is malformed
      */
     constructor(strTime) {
+        if (strTime) {
+            this._parseTime(strTime);
+        }
+    }
+
+    /**
+     * Sets the time of this instance of {@link Time} to `strTime`.
+     * @param {String} strTime The time to set this {@link Time} instance to.
+     * @throws {@link TimeFormatError} in case the string is malformed
+     */
+    setTime(strTime) {
         this._parseTime(strTime);
     }
 
@@ -36,12 +47,20 @@ export class Time {
      * @throws {@link TimeFormatError} if the time string is malformed.
      */
     _parseHours(strTime) {
-        let strHours = strTime.split(':')[0];
+        let timeParts = strTime.split(':');
+        if (timeParts.length != 2) {
+            throw new TimeFormatError(strTime, `Invalid time format: ${strTime}`);
+        }
+        let strHours = timeParts[0];
         let numHours = -1;
         try {
-            numHours = parseInt(hours);
+            numHours = parseInt(strHours);
+            /* Strings are parsed as `NaN` when no numbers are present. */
+            if (isNaN(numHours)) {
+                numHours = -1;
+            }
         } catch (ex) {
-            console.warn(`Failed to parse ${hours} as hours.`);
+            console.warn(`Failed to parse ${strHours} as hours.`);
         }
         if (numHours < 0 || numHours > 12) {
             throw new TimeFormatError(strTime, `Invalid time format: ${strTime}`);
@@ -65,6 +84,10 @@ export class Time {
         let numMins = -1;
         try {
             numMins = parseInt(strMins);
+            /* Strings are parsed as `NaN` when no numbers are present. */
+            if (isNaN(numMins)) {
+                numMins = -1;
+            }
         } catch (ex) {
             console.warn(`Failed to parse ${strMins} as minutes in ${strTime}.`);
         }
