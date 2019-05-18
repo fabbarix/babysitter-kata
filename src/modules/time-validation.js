@@ -10,7 +10,7 @@ export class TimeValidation {
      * Creates an instance of the time validation class
      * initialized to verify times between `startTime` and
      * `endTime` as valid working hours. The expected format
-     * of these times is `HH:MM<AM|PM>`.
+     * of these times is `HH:MM(AM|PM)`.
      * 
      * @constructor
      * @param {String} startTime 
@@ -23,6 +23,16 @@ export class TimeValidation {
         if (this._isGreater())
         this._startTime = startTime;
         this._endTime = endTime;
+    }
+
+    /**
+     * Returns a truthy value if `time` is correctly formatted. The expected
+     * format of the time string is: `HH:MM(AM|PM)`.
+     * 
+     * @param {String} time The string representing a time we need to check.
+     */
+    _isFormatCorrect(time) {
+
     }
 
     /**
