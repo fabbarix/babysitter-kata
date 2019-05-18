@@ -27,4 +27,14 @@ export class TimeValidation {
         }
     }
 
+    /**
+     * Checks if the times provided as start and end of a shift
+     * are valid for the working hours setup for this {@link TimeValidation} instance.
+     * 
+     * @param {String} startTime Shift start time
+     * @param {String} endTime Shift end time
+     */
+    isShiftValid(startTime, endTime) {
+        return false;
+    }
 }
