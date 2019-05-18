@@ -19,6 +19,21 @@ export class FamilyPaymentSchedule {
     }
 
     /**
+     * Calculates the payment for a shift provided to this
+     * family.
+     * 
+     * @param {String} strStart Shift start time
+     * @param {String} strEnd Shift end time
+     */
+    calculatePayment(strStart, strEnd) {
+        let startTime = new Time(strStart);
+        let endTime = new Time(strEnd);
+        return startTime
+            .hoursTo(endTime)
+            .reduce((total, hour) => this.rateFor(hour) + total, 0);
+    }
+
+    /**
      * Sets a new rate for this family starting at the provided time.
      * 
      * @param {String} startingHour The hour at which this rate starts. Format `HH:MM(AM|PM)`.
