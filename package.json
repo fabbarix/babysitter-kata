@@ -5,7 +5,7 @@
   "description": "The Kata exercise",
   "main": "src/index.js",
   "scripts": {
-    "test": "cucumber-js ./specs -r ./steps",
+    "test": "node -r esm node_modules/.bin/cucumber-js -f node_modules/cucumber-pretty ./specs -r ./steps",
     "dev:test": "mocha -r esm tests"
   },
   "author": "Fabio 'MrWHO' Torchetti <fabbari@gmail.com>",
@@ -13,6 +13,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "cucumber": "^5.1.0",
+    "cucumber-pretty": "^1.5.0",
     "jshint": "^2.10.2",
     "mocha": "^6.1.4"
   },
