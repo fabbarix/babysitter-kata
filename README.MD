@@ -22,13 +22,23 @@ npm i
 This will download and install the libraries from the remote _npm_ registry, so _make sure
 you have a working internet connection_.
 
-## Running the tests
+## Running the code
+
+To run the code execute:
+
+```bash
+npm start
+```
+
+## Running the BDD tests
 
 You can easily run the BDD tests by executing:
 
 ```bash
 npm test
 ```
+
+## Running the Unit tests
 
 You can run the unit tests by running:
 
@@ -37,11 +47,3 @@ npm run dev:test
 ```
 
 The results of the tests will be shown as the *specs* are run.
-
-## Running the code
-
-To run the code execute:
-
-```bash
-npm start
-```
