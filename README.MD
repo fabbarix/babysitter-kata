@@ -24,10 +24,16 @@ you have a working internet connection_.
 
 ## Running the tests
 
-You can easily run the tests by executing:
+You can easily run the BDD tests by executing:
 
 ```bash
 npm test
+```
+
+You can run the unit tests by running:
+
+```bash
+npm run dev:test
 ```
 
 The results of the tests will be shown as the *specs* are run.
