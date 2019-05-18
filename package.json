@@ -1,16 +1,22 @@
 {
   "name": "kata",
   "version": "1.0.0",
+  "type": "module",
   "description": "The Kata exercise",
   "main": "src/index.js",
   "scripts": {
-    "test": "cucumber-js ./specs -r ./steps"
+    "test": "cucumber-js ./specs -r ./steps",
+    "dev:test": "mocha -r esm tests"
   },
   "author": "Fabio 'MrWHO' Torchetti <fabbari@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
     "chai": "^4.2.0",
     "cucumber": "^5.1.0",
-    "jshint": "^2.10.2"
+    "jshint": "^2.10.2",
+    "mocha": "^6.1.4"
+  },
+  "dependencies": {
+    "esm": "^3.2.25"
   }
 }
