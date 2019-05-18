@@ -90,4 +90,21 @@ describe('Time', function() {
                 .that.has.property('providedTime').that.equals('12:00AZ');
         });
     });
+    describe('#isBefore', function() {
+        it('Should validate that 05:00PM comes before 07:00PM', function() {
+            let timeBefore = new Time('05:00PM');
+            let timeAfter = new Time('07:00PM');
+            expect(timeBefore.isBefore(timeAfter)).to.equal(true);
+        });
+        it('Should validate that 08:00AM comes before 10:00AM', function() {
+            let timeBefore = new Time('08:00AM');
+            let timeAfter = new Time('10:00AM');
+            expect(timeBefore.isBefore(timeAfter)).to.equal(true);
+        });
+        it('Should validate that 08:00PM comes before 04:00AM', function() {
+            let timeBefore = new Time('08:00PM');
+            let timeAfter = new Time('04:00AM');
+            expect(timeBefore.isBefore(timeAfter)).to.equal(true);
+        });
+    });
 });
