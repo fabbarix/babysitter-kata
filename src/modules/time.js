@@ -13,6 +13,10 @@ export class Time {
         return parseInt(`${`0${this.hours}`.slice(-2)}${`0${this.minutes}`.slice(-2)}`);
     }
 
+    get euroHours() {
+        let euro = this.isAM() ? this.hours : this.hours + 12;
+    }
+
     /**
      * @constructor
      * @param {String} strTime Optional. Time representation as string. Expected format: `HH:MM(AM|PM)`
@@ -31,6 +35,17 @@ export class Time {
      */
     setTime(strTime) {
         this._parseTime(strTime);
+    }
+
+    /**
+     * Returns an array of hours from this instance of {@link Time} to
+     * the `endTime` passed as a parameter.
+     * 
+     * @param {Time} endTime The time to count the hours to.
+     * @returns {Arryay[int]} The hours between this instance and `endTime`
+     */
+    hoursTo(endTime) {
+        return [];
     }
 
     /**

@@ -154,4 +154,21 @@ describe('Time', function() {
             expect(timeBefore.isAfterStart(timeAfter)).to.equal(true);
         });
     });
+    describe('#hoursTo', function() {
+        it('From 3:00PM to 3:05PM it should return [15]', function() {
+            let timeFrom = new Time('03:00PM');
+            let timeTo = new Time('03:05PM');
+            expect(timeFrom.hoursTo(timeTo)).to.eql([15]);
+        });
+        it('From 5:00AM to 3:05PM it should return [5,6,7,8,9,10,11,12,13,14,15]', function() {
+            let timeFrom = new Time('05:00AM');
+            let timeTo = new Time('03:05PM');
+            expect(timeFrom.hoursTo(timeTo)).to.eql([5,6,7,8,9,10,11,12,13,14,15]);
+        });
+        it('From 7:15PM to 3:05AM it should return [7,8,9,10,11,0,1,2,3]', function() {
+            let timeFrom = new Time('07:15PM');
+            let timeTo = new Time('03:05AM');
+            expect(timeFrom.hoursTo(timeTo)).to.eql([7,8,9,10,11,0,1,2,3]);
+        });
+    });
 });
