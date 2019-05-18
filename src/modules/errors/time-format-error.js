@@ -4,11 +4,6 @@
 export class TimeFormatError extends Error {
     
     /**
-     * The time that was provided with the wrong format.
-     */
-    providedTime = undefined;
-
-    /**
      * Creates and instance of `TimeFormatError` that will
      * be populated with the provided invalid time.
      * 
