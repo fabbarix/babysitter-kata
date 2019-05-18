@@ -39,13 +39,13 @@ export class TimeValidation {
      */
     isShiftValid(startTime, endTime) {
         let timeStart = new Time(startTime);
-        if (!timeStart.isAfterStart(this._startTime)) {
+        if (timeStart.isBeforeEnd(this._startTime)) {
             throw new TimeValidationError(startTime, endTime, 
                 `Provided Start Time [${startTime}] is before shift start time [${this._startTime.strTime}].`);
         }
 
         let timeEnd = new Time(endTime);
-        if (!timeEnd.isBeforeEnd(this._endTime)) {
+        if (timeEnd.isAfterStart(this._endTime)) {
             throw new TimeValidationError(startTime, endTime, 
                 `Provided End Time [${endTime}] is after shift end time [${this._endTime.strTime}].`);
         }
