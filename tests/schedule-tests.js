@@ -1,7 +1,5 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { TimeValidation } from '../src/modules/time-validation';
-import { TimeValidationError } from '../src/modules/errors/time-validation-error';
 import { FamilyPaymentSchedule } from '../src/modules/family-schedule';
 
 /* JSHint doesn't like Chai's oddly formed expressions. */
