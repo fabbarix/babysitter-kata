@@ -19,7 +19,7 @@ describe('TimeValidation', function() {
             expect(timeValidation).not.to.be.undefined;
         });
         it('Should reject 5:00PM as a start time and 3:00PM as an end time', function() {
-            expect(() => new TimeValidation('5:00PM', '3:00PM')).to.throw(TimeValidationError, 'Provided end time [3:00PM] is before the provided start time [5:00PM].');
+            expect(() => new TimeValidation('5:00PM', '3:00PM')).to.throw(TimeValidationError, 'Provided working hours end time [3:00PM] is before the provided start time [5:00PM].');
         });
     });
     describe('#isShiftValid', function() {
@@ -29,7 +29,7 @@ describe('TimeValidation', function() {
         });
         it('Should accept 6:12PM to 3:00AM as valid, with working hours between 5:00PM and 4:00AM', function() {
             let timeValidation = new TimeValidation('5:00PM', '4:00AM');
-            expect(timeValidation.isShiftValid('6:12PM', '3:00PM')).to.be.true;
+            expect(timeValidation.isShiftValid('6:12PM', '3:00AM')).to.be.true;
         });
     });
 });

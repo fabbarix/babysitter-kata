@@ -23,7 +23,8 @@ export class TimeValidation {
         this._startTime = new Time(startTime);
         this._endTime = new Time(endTime);
         if (!this._endTime.isAfterStart(this._startTime)) {
-            throw new TimeValidationError(startTime, endTime, `Provided end time [${endTime}] is before the provided start time [${startTime}].`);
+            throw new TimeValidationError(startTime, endTime, 
+                `Provided working hours end time [${endTime}] is before the provided start time [${startTime}].`);
         }
     }
 
@@ -33,8 +34,27 @@ export class TimeValidation {
      * 
      * @param {String} startTime Shift start time
      * @param {String} endTime Shift end time
+     * @returns {boolean} `true` if the shift is correct
+     * @throws TimeFormatError If either shift start or end time are not formatted.
      */
     isShiftValid(startTime, endTime) {
-        return false;
+        let timeStart = new Time(startTime);
+        if (!timeStart.isAfterStart(this._startTime)) {
+            throw new TimeValidationError(startTime, endTime, 
+                `Provided Start Time [${startTime}] is before shift start time [${this._startTime.strTime}].`);
+        }
+
+        let timeEnd = new Time(endTime);
+        if (!timeEnd.isBeforeEnd(this._endTime)) {
+            throw new TimeValidationError(startTime, endTime, 
+                `Provided End Time [${endTime}] is after shift end time [${this._endTime.strTime}].`);
+        }
+
+        if (!timeEnd.isAfterStart(timeStart)) {
+            throw new TimeValidationError(startTime, endTime, 
+                `Provided End Time [${endTime}] is before provided start time [${startTime}].`);
+        }
+
+        return true;
     }
 }
