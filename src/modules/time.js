@@ -58,6 +58,14 @@ export class Time {
             endTime.euroHours - this.euroHours + 1:
             endTime.euroHours + 24 - this.euroHours + 1;
 
+        /**
+         * To count a fraction of an hour we need to go past the
+         * startTime minutes.
+         */
+        if (endTime.minutes<this.minutes) {
+            numHours -= 1;
+        }
+
         while (numHours) {
             hours.push(startHour);
             startHour = startHour == 23 ? 0 : startHour + 1;
