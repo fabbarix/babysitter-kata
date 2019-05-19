@@ -165,20 +165,20 @@ describe('Time', function() {
             let timeTo = new Time('03:05PM');
             expect(timeFrom.hoursTo(timeTo)).to.eql([5,6,7,8,9,10,11,12,13,14,15]);
         });
-        it('From 7:15PM to 3:05AM it should return [19,20,21,22,23,0,1,2,3]', function() {
+        it('From 7:15PM to 3:05AM it should return [19,20,21,22,23,0,1,2]', function() {
             let timeFrom = new Time('07:15PM');
             let timeTo = new Time('03:05AM');
-            expect(timeFrom.hoursTo(timeTo)).to.eql([19,20,21,22,23,0,1,2,3]);
+            expect(timeFrom.hoursTo(timeTo)).to.eql([19,20,21,22,23,0,1,2]);
         });
-        it('From 12:15AM to 3:05AM it should return [0,1,2,3]', function() {
+        it('From 12:15AM to 3:05AM it should return [0,1,2]', function() {
             let timeFrom = new Time('12:15AM');
             let timeTo = new Time('03:05AM');
-            expect(timeFrom.hoursTo(timeTo)).to.eql([0,1,2,3]);
+            expect(timeFrom.hoursTo(timeTo)).to.eql([0,1,2]);
         });
-        it('From 12:15PM to 3:05AM it should return [12,13,14,15,16,17,18,19,20,21,22,23,0,1,2,3]', function() {
+        it('From 12:15PM to 3:05AM it should return [12,13,14,15,16,17,18,19,20,21,22,23,0,1,2]', function() {
             let timeFrom = new Time('12:15PM');
             let timeTo = new Time('03:05AM');
-            expect(timeFrom.hoursTo(timeTo)).to.eql([12,13,14,15,16,17,18,19,20,21,22,23,0,1,2,3]);
+            expect(timeFrom.hoursTo(timeTo)).to.eql([12,13,14,15,16,17,18,19,20,21,22,23,0,1,2]);
         });
     });
 });

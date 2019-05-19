@@ -13,7 +13,8 @@ Feature: Job payment calculation feature
     Then I expect the payment to be "<payment>"
     Examples:
       | start    | end      | payment     |
-      |  5:30PM  | 11:25PM  | 6*15 + 1*20 |
+      |  5:30PM  | 11:35PM  | 6*15 + 1*20 |
+      |  5:30PM  | 11:25PM  | 6*15        |
       |  5:00PM  | 10:25PM  | 6*15        |
       
   Scenario Outline: Family B
@@ -27,7 +28,8 @@ Feature: Job payment calculation feature
     Then I expect the payment to be "<payment>"
     Examples:
       | start    | end      | payment           |
-      |  5:30PM  | 11:25PM  | 5*12 + 2*8        |
+      |  5:30PM  | 11:25PM  | 5*12 + 1*8        |
+      |  5:30PM  | 11:45PM  | 5*12 + 2*8        |
       |  5:00PM  | 02:10AM  | 5*12 + 2*8 + 3*16 |
       
   Scenario Outline: Family C
@@ -40,6 +42,6 @@ Feature: Job payment calculation feature
     Then I expect the payment to be "<payment>"
     Examples:
       | start    | end      | payment     |
-      |  5:30PM  | 08:25PM  | 4*21        |
+      |  5:30PM  | 08:25PM  | 3*21        |
       |  5:00PM  | 11:10PM  | 4*21 + 3*15 |
       
